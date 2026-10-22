@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://${MYSQL_HOST:mysql}:3306/campus_product?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    username: ${MYSQL_USER:campus}
+    password: ${MYSQL_PASSWORD}
+  sql:
+    init:
+      mode: never
+  data:
+    redis:
+      host: ${REDIS_HOST:redis}
+      password: ${REDIS_PASSWORD}
+      timeout: 2s
+  cloud:
+    nacos:
+      discovery:
+        enabled: true
+        server-addr: ${NACOS_ADDR:nacos:8848}
+        username: ${NACOS_USERNAME:nacos}
+        password: ${NACOS_PASSWORD}
+market:
+  cache-enabled: true
+  auth-url: ${AUTH_URL:http://user:8081/api/users/identity}

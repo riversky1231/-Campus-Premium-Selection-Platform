@@ -1,0 +1,27 @@
+server:
+  port: 7091
+spring:
+  application:
+    name: seata-server
+logging:
+  config: classpath:logback-spring.xml
+console:
+  user:
+    username: ${SEATA_USER:seata}
+    password: ${SEATA_PASSWORD}
+seata:
+  config:
+    type: file
+  registry:
+    type: file
+  store:
+    mode: file
+    file:
+      dir: /seata-server/sessionStore
+  server:
+    service-port: 8091
+  security:
+    secretKey: ${SEATA_SECRET}
+    tokenValidityInMilliseconds: 1800000
+    ignore:
+      urls: /,/**/*.css,/**/*.js,/**/*.html,/**/*.map,/**/*.svg,/**/*.png,/**/*.jpeg,/**/*.ico,/api/v1/auth/login,/metadata/v1/**

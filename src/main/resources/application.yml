@@ -1,0 +1,39 @@
+server:
+  port: 8082
+spring:
+  boot:
+    admin:
+      client:
+        enabled: ${MONITOR_ENABLED:false}
+        url: ${MONITOR_URL:http://monitor:8090}
+        username: ${MONITOR_USER:monitor}
+        password: ${MONITOR_PASSWORD:}
+  application:
+    name: product-service
+  profiles:
+    default: demo
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: true
+  cloud:
+    nacos:
+      discovery:
+        enabled: false
+    sentinel:
+      eager: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+market:
+  admin-token: ${ADMIN_TOKEN:}
+  internal-token: ${INTERNAL_TOKEN:}
+  cache-enabled: false
+  auth-url: ${AUTH_URL:http://localhost:8081/api/users/identity}
+seata:
+  enabled: false
+  enable-auto-data-source-proxy: false

@@ -1,0 +1,9 @@
+server:
+  port: 8090
+spring:
+  application:
+    name: market-monitor
+  security:
+    user:
+      name: ${MONITOR_USER:monitor}
+      password: ${MONITOR_PASSWORD}

@@ -1,0 +1,1342 @@
+openapi: 3.0.3
+info:
+  title: 校园优选后端API
+  version: 1.0.0
+  description: 公开网关API；管理员接口需要ADMIN角色。内部接口不暴露。响应字段与业务约定见API.md。
+servers:
+- url: http://localhost:8080
+security:
+- bearerAuth: []
+paths:
+  /api/auth/register:
+    post:
+      summary: 注册
+      tags:
+      - 用户
+      responses:
+        '200':
+          description: 成功；具体字段见API.md
+        '400':
+          description: 参数错误
+        '401':
+          description: 未登录或凭证无效
+        '403':
+          description: 权限不足
+        '404':
+          description: 不存在或不属于当前用户
+        '409':
+          description: 业务状态冲突
+        '429':
+          description: 请求过于频繁
+        '503':
+          description: 依赖不可用
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Register'
+  /api/auth/login:
+    post:
+      summary: 登录
+      tags:
+      - 用户
+      responses:
+        '200':
+          description: 成功；具体字段见API.md
+        '400':
+          description: 参数错误
+        '401':
+          description: 未登录或凭证无效
+        '403':
+          description: 权限不足
+        '404':
+          description: 不存在或不属于当前用户
+        '409':
+          description: 业务状态冲突
+        '429':
+          description: 请求过于频繁
+        '503':
+          description: 依赖不可用
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Login'
+  /api/auth/wx-login:
+    post:
+      summary: 微信授权登录
+      tags:
+      - 用户
+      responses:
+        '200':
+          description: 成功；具体字段见API.md
+        '400':
+          description: 参数错误
+        '401':
+          description: 未登录或凭证无效
+        '403':
+          description: 权限不足
+        '404':
+          description: 不存在或不属于当前用户
+        '409':
+          description: 业务状态冲突
+        '429':
+          description: 请求过于频繁
+        '503':
+          description: 依赖不可用
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WxLogin'
+  /api/auth/logout:
+    post:
+      summary: 退出
+      tags:
+      - 用户
+      responses:
+        '200':
+          description: 成功；具体字段见API.md
+        '400':
+          description: 参数错误
+        '401':
+          description: 未登录或凭证无效
+        '403':
+          description: 权限不足
+        '404':
+          description: 不存在或不属于当前用户
+        '409':
+          description: 业务状态冲突
+        '429':
+          description: 请求过于频繁
+        '503':
+          description: 依赖不可用
+  /api/users/me:
+    get:
+      summary: 个人资料
+      tags:
+      - 用户
+      responses:
+        '200':
+          description: 成功；具体字段见API.md
+        '400':
+          description: 参数错误
+        '401':
+          description: 未登录或凭证无效
+        '403':
+          description: 权限不足
+        '404':
+          description: 不存在或不属于当前用户
+        '409':
+          description: 业务状态冲突
+        '429':
+          description: 请求过于频繁
+        '503':
+          description: 依赖不可用
+    put:
+      summary: 修改昵称
+      tags:
+      - 用户
+      responses:
+        '200':
+          description: 成功；具体字段见API.md
+        '400':
+          description: 参数错误
+        '401':
+          description: 未登录或凭证无效
+        '403':
+          description: 权限不足
+        '404':
+          description: 不存在或不属于当前用户
+        '409':
+          description: 业务状态冲突
+        '429':
+          description: 请求过于频繁
+        '503':
+          description: 依赖不可用
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Nickname'
+  /api/users/identity:
+    get:
+      summary: 校验身份
+      tags:
+      - 用户
+      responses:
+        '200':
+          description: 成功；具体字段见API.md
+        '400':
+          description: 参数错误
+        '401':
+          description: 未登录或凭证无效
+        '403':
+          description: 权限不足
+        '404':
+          description: 不存在或不属于当前用户
+        '409':
+          description: 业务状态冲突
+        '429':
+          description: 请求过于频繁
+        '503':
+          description: 依赖不可用
+  /api/users/addresses:
+    get:
+      summary: 地址列表
+      tags:
+      - 用户
+      responses:
+        '200':
+          description: 成功；具体字段见API.md
+        '400':
+          description: 参数错误
+        '401':
+          description: 未登录或凭证无效
+        '403':
+          description: 权限不足
+        '404':
+          description: 不存在或不属于当前用户
+        '409':
+          description: 业务状态冲突
+        '429':
+          description: 请求过于频繁
+        '503':
+          description: 依赖不可用
+    post:
+      summary: 创建地址
+      tags:
+      - 用户
+      responses:
+        '200':
+          description: 成功；具体字段见API.md
+        '400':
+          description: 参数错误
+        '401':
+          description: 未登录或凭证无效
+        '403':
+          description: 权限不足
+        '404':
+          description: 不存在或不属于当前用户
+        '409':
+          description: 业务状态冲突
+        '429':
+          description: 请求过于频繁
+        '503':
+          description: 依赖不可用
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Address'
+  /api/users/addresses/{id}:
+    put:
+      summary: 修改自己的地址
+      tags:
+      - 用户
+      responses:
+        '200':
+          description: 成功；具体字段见API.md
+        '400':
+          description: 参数错误
+        '401':
+          description: 未登录或凭证无效
+        '403':
+          description: 权限不足
+        '404':
+          description: 不存在或不属于当前用户
+        '409':
+          description: 业务状态冲突
+        '429':
+          description: 请求过于频繁
+        '503':
+          description: 依赖不可用
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Address'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+    delete:
+      summary: 删除自己的地址
+      tags:
+      - 用户
+      responses:
+        '200':
+          description: 成功；具体字段见API.md
+        '400':
+          description: 参数错误
+        '401':
+          description: 未登录或凭证无效
+        '403':
+          description: 权限不足
+        '404':
+          description: 不存在或不属于当前用户
+        '409':
+          description: 业务状态冲突
+        '429':
+          description: 请求过于频繁
+        '503':
+          description: 依赖不可用
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/users/wallet:
+    get:
+      summary: 余额
+      tags:
+      - 用户
+      responses:
+        '200':
+          description: 成功；具体字段见API.md
+        '400':
+          description: 参数错误
+        '401':
+          description: 未登录或凭证无效
+        '403':
+          description: 权限不足
+        '404':
+          description: 不存在或不属于当前用户
+        '409':
+          description: 业务状态冲突
+        '429':
+          description: 请求过于频繁
+        '503':
+          description: 依赖不可用
+  /api/users/wallet/ledger:
+    get:
+      summary: 余额流水
+      tags:
+      - 用户
+      responses:
+        '200':
+          description: 成功；具体字段见API.md
+        '400':
+          description: 参数错误
+        '401':
+          description: 未登录或凭证无效
+        '403':
+          description: 权限不足
+        '404':
+          description: 不存在或不属于当前用户
+        '409':
+          description: 业务状态冲突
+        '429':
+          description: 请求过于频繁
+        '503':
+          description: 依赖不可用
+      parameters:
+      - name: page
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000000
+          default: 1
+  /api/admin/users:
+    get:
+      summary: 管理员用户列表
+      tags:
+      - 用户
+      responses:
+        '200':
+          description: 成功；具体字段见API.md
+        '400':
+          description: 参数错误
+        '401':
+          description: 未登录或凭证无效
+        '403':
+          description: 权限不足
+        '404':
+          description: 不存在或不属于当前用户
+        '409':
+          description: 业务状态冲突
+        '429':
+          description: 请求过于频繁
+        '503':
+          description: 依赖不可用
+      parameters:
+      - name: page
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000000
+          default: 1
+  /api/admin/users/{id}/enabled:
+    put:
+      summary: 启停账号
+      tags:
+      - 用户
+      responses:
+        '200':
+          description: 成功；具体字段见API.md
+        '400':
+          description: 参数错误
+        '401':
+          description: 未登录或凭证无效
+        '403':
+          description: 权限不足
+        '404':
+          description: 不存在或不属于当前用户
+        '409':
+          description: 业务状态冲突
+        '429':
+          description: 请求过于频繁
+        '503':
+          description: 依赖不可用
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Enabled'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/admin/wallet/recharge:
+    post:
+      summary: 模拟充值
+      tags:
+      - 用户
+      responses:
+        '200':
+          description: 成功；具体字段见API.md
+        '400':
+          description: 参数错误
+        '401':
+          description: 未登录或凭证无效
+        '403':
+          description: 权限不足
+        '404':
+          description: 不存在或不属于当前用户
+        '409':
+          description: 业务状态冲突
+        '429':
+          description: 请求过于频繁
+        '503':
+          description: 依赖不可用
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Money'
+  /api/categories:
+    get:
+      summary: 公开分类
+      tags:
+      - 商品
+      responses:
+        '200':
+          description: 成功；具体字段见API.md
+        '400':
+          description: 参数错误
+        '401':
+          description: 未登录或凭证无效
+        '403':
+          description: 权限不足
+        '404':
+          description: 不存在或不属于当前用户
+        '409':
+          description: 业务状态冲突
+        '429':
+          description: 请求过于频繁
+        '503':
+          description: 依赖不可用
+      security: []
+  /api/products:
+    get:
+      summary: 在售商品
+      tags:
+      - 商品
+      responses:
+        '200':
+          description: 成功；具体字段见API.md
+        '400':
+          description: 参数错误
+        '401':
+          description: 未登录或凭证无效
+        '403':
+          description: 权限不足
+        '404':
+          description: 不存在或不属于当前用户
+        '409':
+          description: 业务状态冲突
+        '429':
+          description: 请求过于频繁
+        '503':
+          description: 依赖不可用
+      security: []
+      parameters:
+      - name: page
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000000
+          default: 1
+      - name: size
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 12
+      - name: categoryId
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+      - name: keyword
+        in: query
+        schema:
+          type: string
+          maxLength: 100
+  /api/products/{id}:
+    get:
+      summary: 在售详情
+      tags:
+      - 商品
+      responses:
+        '200':
+          description: 成功；具体字段见API.md
+        '400':
+          description: 参数错误
+        '401':
+          description: 未登录或凭证无效
+        '403':
+          description: 权限不足
+        '404':
+          description: 不存在或不属于当前用户
+        '409':
+          description: 业务状态冲突
+        '429':
+          description: 请求过于频繁
+        '503':
+          description: 依赖不可用
+      security: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/admin/products:
+    get:
+      summary: 管理商品列表
+      tags:
+      - 商品
+      responses:
+        '200':
+          description: 成功；具体字段见API.md
+        '400':
+          description: 参数错误
+        '401':
+          description: 未登录或凭证无效
+        '403':
+          description: 权限不足
+        '404':
+          description: 不存在或不属于当前用户
+        '409':
+          description: 业务状态冲突
+        '429':
+          description: 请求过于频繁
+        '503':
+          description: 依赖不可用
+      parameters:
+      - name: page
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000000
+          default: 1
+      - name: size
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 12
+      - name: categoryId
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+      - name: keyword
+        in: query
+        schema:
+          type: string
+          maxLength: 100
+    post:
+      summary: 创建商品
+      tags:
+      - 商品
+      responses:
+        '200':
+          description: 成功；具体字段见API.md
+        '400':
+          description: 参数错误
+        '401':
+          description: 未登录或凭证无效
+        '403':
+          description: 权限不足
+        '404':
+          description: 不存在或不属于当前用户
+        '409':
+          description: 业务状态冲突
+        '429':
+          description: 请求过于频繁
+        '503':
+          description: 依赖不可用
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewProduct'
+  /api/admin/products/{id}:
+    put:
+      summary: 编辑商品
+      tags:
+      - 商品
+      responses:
+        '200':
+          description: 成功；具体字段见API.md
+        '400':
+          description: 参数错误
+        '401':
+          description: 未登录或凭证无效
+        '403':
+          description: 权限不足
+        '404':
+          description: 不存在或不属于当前用户
+        '409':
+          description: 业务状态冲突
+        '429':
+          description: 请求过于频繁
+        '503':
+          description: 依赖不可用
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/admin/categories:
+    post:
+      summary: 创建分类
+      tags:
+      - 商品
+      responses:
+        '200':
+          description: 成功；具体字段见API.md
+        '400':
+          description: 参数错误
+        '401':
+          description: 未登录或凭证无效
+        '403':
+          description: 权限不足
+        '404':
+          description: 不存在或不属于当前用户
+        '409':
+          description: 业务状态冲突
+        '429':
+          description: 请求过于频繁
+        '503':
+          description: 依赖不可用
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Category'
+  /api/admin/categories/{id}:
+    put:
+      summary: 修改分类
+      tags:
+      - 商品
+      responses:
+        '200':
+          description: 成功；具体字段见API.md
+        '400':
+          description: 参数错误
+        '401':
+          description: 未登录或凭证无效
+        '403':
+          description: 权限不足
+        '404':
+          description: 不存在或不属于当前用户
+        '409':
+          description: 业务状态冲突
+        '429':
+          description: 请求过于频繁
+        '503':
+          description: 依赖不可用
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Category'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+    delete:
+      summary: 删除未引用分类
+      tags:
+      - 商品
+      responses:
+        '200':
+          description: 成功；具体字段见API.md
+        '400':
+          description: 参数错误
+        '401':
+          description: 未登录或凭证无效
+        '403':
+          description: 权限不足
+        '404':
+          description: 不存在或不属于当前用户
+        '409':
+          description: 业务状态冲突
+        '429':
+          description: 请求过于频繁
+        '503':
+          description: 依赖不可用
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/admin/stock/add:
+    post:
+      summary: 幂等补货
+      tags:
+      - 商品
+      responses:
+        '200':
+          description: 成功；具体字段见API.md
+        '400':
+          description: 参数错误
+        '401':
+          description: 未登录或凭证无效
+        '403':
+          description: 权限不足
+        '404':
+          description: 不存在或不属于当前用户
+        '409':
+          description: 业务状态冲突
+        '429':
+          description: 请求过于频繁
+        '503':
+          description: 依赖不可用
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Stock'
+  /api/cart:
+    get:
+      summary: 当前购物车
+      tags:
+      - 商品
+      responses:
+        '200':
+          description: 成功；具体字段见API.md
+        '400':
+          description: 参数错误
+        '401':
+          description: 未登录或凭证无效
+        '403':
+          description: 权限不足
+        '404':
+          description: 不存在或不属于当前用户
+        '409':
+          description: 业务状态冲突
+        '429':
+          description: 请求过于频繁
+        '503':
+          description: 依赖不可用
+    delete:
+      summary: 清空购物车
+      tags:
+      - 商品
+      responses:
+        '200':
+          description: 成功；具体字段见API.md
+        '400':
+          description: 参数错误
+        '401':
+          description: 未登录或凭证无效
+        '403':
+          description: 权限不足
+        '404':
+          description: 不存在或不属于当前用户
+        '409':
+          description: 业务状态冲突
+        '429':
+          description: 请求过于频繁
+        '503':
+          description: 依赖不可用
+  /api/cart/{id}:
+    put:
+      summary: 设置购物数量
+      tags:
+      - 商品
+      responses:
+        '200':
+          description: 成功；具体字段见API.md
+        '400':
+          description: 参数错误
+        '401':
+          description: 未登录或凭证无效
+        '403':
+          description: 权限不足
+        '404':
+          description: 不存在或不属于当前用户
+        '409':
+          description: 业务状态冲突
+        '429':
+          description: 请求过于频繁
+        '503':
+          description: 依赖不可用
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cart'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/orders:
+    post:
+      summary: 下单
+      tags:
+      - 交易
+      responses:
+        '200':
+          description: 成功；具体字段见API.md
+        '400':
+          description: 参数错误
+        '401':
+          description: 未登录或凭证无效
+        '403':
+          description: 权限不足
+        '404':
+          description: 不存在或不属于当前用户
+        '409':
+          description: 业务状态冲突
+        '429':
+          description: 请求过于频繁
+        '503':
+          description: 依赖不可用
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+    get:
+      summary: 我的订单
+      tags:
+      - 交易
+      responses:
+        '200':
+          description: 成功；具体字段见API.md
+        '400':
+          description: 参数错误
+        '401':
+          description: 未登录或凭证无效
+        '403':
+          description: 权限不足
+        '404':
+          description: 不存在或不属于当前用户
+        '409':
+          description: 业务状态冲突
+        '429':
+          description: 请求过于频繁
+        '503':
+          description: 依赖不可用
+      parameters:
+      - name: page
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000000
+          default: 1
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - PENDING
+          - PAID
+          - COMPLETED
+          - CANCELLED
+  /api/orders/{id}:
+    get:
+      summary: 我的订单详情
+      tags:
+      - 交易
+      responses:
+        '200':
+          description: 成功；具体字段见API.md
+        '400':
+          description: 参数错误
+        '401':
+          description: 未登录或凭证无效
+        '403':
+          description: 权限不足
+        '404':
+          description: 不存在或不属于当前用户
+        '409':
+          description: 业务状态冲突
+        '429':
+          description: 请求过于频繁
+        '503':
+          description: 依赖不可用
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/orders/{id}/pay:
+    post:
+      summary: 余额模拟支付
+      tags:
+      - 交易
+      responses:
+        '200':
+          description: 成功；具体字段见API.md
+        '400':
+          description: 参数错误
+        '401':
+          description: 未登录或凭证无效
+        '403':
+          description: 权限不足
+        '404':
+          description: 不存在或不属于当前用户
+        '409':
+          description: 业务状态冲突
+        '429':
+          description: 请求过于频繁
+        '503':
+          description: 依赖不可用
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/orders/{id}/cancel:
+    post:
+      summary: 取消待支付订单
+      tags:
+      - 交易
+      responses:
+        '200':
+          description: 成功；具体字段见API.md
+        '400':
+          description: 参数错误
+        '401':
+          description: 未登录或凭证无效
+        '403':
+          description: 权限不足
+        '404':
+          description: 不存在或不属于当前用户
+        '409':
+          description: 业务状态冲突
+        '429':
+          description: 请求过于频繁
+        '503':
+          description: 依赖不可用
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+  /api/admin/orders:
+    get:
+      summary: 管理员订单列表
+      tags:
+      - 交易
+      responses:
+        '200':
+          description: 成功；具体字段见API.md
+        '400':
+          description: 参数错误
+        '401':
+          description: 未登录或凭证无效
+        '403':
+          description: 权限不足
+        '404':
+          description: 不存在或不属于当前用户
+        '409':
+          description: 业务状态冲突
+        '429':
+          description: 请求过于频繁
+        '503':
+          description: 依赖不可用
+      parameters:
+      - name: page
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000000
+          default: 1
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - PENDING
+          - PAID
+          - COMPLETED
+          - CANCELLED
+  /api/admin/orders/redeem:
+    post:
+      summary: 提货核销
+      tags:
+      - 交易
+      responses:
+        '200':
+          description: 成功；具体字段见API.md
+        '400':
+          description: 参数错误
+        '401':
+          description: 未登录或凭证无效
+        '403':
+          description: 权限不足
+        '404':
+          description: 不存在或不属于当前用户
+        '409':
+          description: 业务状态冲突
+        '429':
+          description: 请求过于频繁
+        '503':
+          description: 依赖不可用
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Redeem'
+  /api/notices:
+    get:
+      summary: 站内通知
+      tags:
+      - 交易
+      responses:
+        '200':
+          description: 成功；具体字段见API.md
+        '400':
+          description: 参数错误
+        '401':
+          description: 未登录或凭证无效
+        '403':
+          description: 权限不足
+        '404':
+          description: 不存在或不属于当前用户
+        '409':
+          description: 业务状态冲突
+        '429':
+          description: 请求过于频繁
+        '503':
+          description: 依赖不可用
+      parameters:
+      - name: page
+        in: query
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 1000000
+          default: 1
+  /api/notices/{id}/read:
+    post:
+      summary: 标记已读
+      tags:
+      - 交易
+      responses:
+        '200':
+          description: 成功；具体字段见API.md
+        '400':
+          description: 参数错误
+        '401':
+          description: 未登录或凭证无效
+        '403':
+          description: 权限不足
+        '404':
+          description: 不存在或不属于当前用户
+        '409':
+          description: 业务状态冲突
+        '429':
+          description: 请求过于频繁
+        '503':
+          description: 依赖不可用
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+  schemas:
+    Register:
+      type: object
+      properties:
+        username:
+          type: string
+          pattern: ^[A-Za-z0-9_]{4,32}$
+        password:
+          type: string
+          minLength: 8
+          maxLength: 64
+        nickname:
+          type: string
+          minLength: 1
+          maxLength: 60
+      required:
+      - username
+      - password
+      - nickname
+      additionalProperties: false
+    Login:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+      required:
+      - username
+      - password
+      additionalProperties: false
+    WxLogin:
+      type: object
+      properties:
+        code:
+          type: string
+      required:
+      - code
+      additionalProperties: false
+    Nickname:
+      type: object
+      properties:
+        nickname:
+          type: string
+          minLength: 1
+          maxLength: 60
+      required:
+      - nickname
+      additionalProperties: false
+    Address:
+      type: object
+      properties:
+        recipient:
+          type: string
+          maxLength: 40
+        phone:
+          type: string
+          pattern: ^[0-9+ -]{6,20}$
+        detail:
+          type: string
+          maxLength: 250
+      required:
+      - recipient
+      - phone
+      - detail
+      additionalProperties: false
+    Money:
+      type: object
+      properties:
+        requestId:
+          type: string
+          pattern: ^[A-Za-z0-9_-]{1,80}$
+        userId:
+          type: integer
+          minimum: 1
+        amount:
+          type: number
+          multipleOf: 0.01
+          minimum: 0.01
+          maximum: 100000
+      required:
+      - requestId
+      - userId
+      - amount
+      additionalProperties: false
+    Enabled:
+      type: object
+      properties:
+        enabled: &id001
+          type: boolean
+      required:
+      - enabled
+      additionalProperties: false
+    Category:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 40
+      required:
+      - name
+      additionalProperties: false
+    Product:
+      type: object
+      properties:
+        categoryId: &id002
+          type: integer
+          minimum: 1
+        name: &id003
+          type: string
+          minLength: 1
+          maxLength: 100
+        description: &id004
+          type: string
+          maxLength: 1000
+        price: &id005
+          type: number
+          multipleOf: 0.01
+          minimum: 0.01
+        onSale: *id001
+      required:
+      - categoryId
+      - name
+      - description
+      - price
+      - onSale
+      additionalProperties: false
+    Stock:
+      type: object
+      properties:
+        requestId:
+          type: string
+          pattern: ^[A-Za-z0-9_-]{1,80}$
+        productId:
+          type: integer
+          minimum: 1
+        quantity:
+          type: integer
+          minimum: 1
+          maximum: 1000000
+      required:
+      - requestId
+      - productId
+      - quantity
+      additionalProperties: false
+    Cart:
+      type: object
+      properties:
+        quantity:
+          type: integer
+          minimum: 0
+          maximum: 99
+      required:
+      - quantity
+      additionalProperties: false
+    Order:
+      type: object
+      properties:
+        requestId:
+          type: string
+          pattern: ^[A-Za-z0-9_-]{1,80}$
+        addressId:
+          type: integer
+          minimum: 1
+        items:
+          type: array
+          minItems: 1
+          maxItems: 20
+          items:
+            type: object
+            properties:
+              productId:
+                type: integer
+                minimum: 1
+              quantity:
+                type: integer
+                minimum: 1
+                maximum: 99
+            required:
+            - productId
+            - quantity
+            additionalProperties: false
+      required:
+      - requestId
+      - addressId
+      - items
+      additionalProperties: false
+    Redeem:
+      type: object
+      properties:
+        pickupCode:
+          type: string
+          pattern: ^[A-F0-9]{16}$
+      required:
+      - pickupCode
+      additionalProperties: false
+    NewProduct:
+      type: object
+      properties:
+        categoryId: *id002
+        name: *id003
+        description: *id004
+        price: *id005
+        onSale: *id001
+        stock:
+          type: integer
+          minimum: 0
+      required:
+      - categoryId
+      - name
+      - description
+      - price
+      - onSale
+      - stock
+      additionalProperties: false

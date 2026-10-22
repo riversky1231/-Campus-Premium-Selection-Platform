@@ -1,0 +1,39 @@
+server:
+  port: 8080
+spring:
+  boot:
+    admin:
+      client:
+        enabled: ${MONITOR_ENABLED:false}
+        url: ${MONITOR_URL:http://monitor:8090}
+        username: ${MONITOR_USER:monitor}
+        password: ${MONITOR_PASSWORD:}
+  application:
+    name: market-gateway
+  profiles:
+    default: demo
+  cloud:
+    nacos:
+      discovery:
+        enabled: false
+    gateway:
+      routes:
+        - id: user
+          uri: ${USER_ROUTE:http://localhost:8081}
+          predicates:
+            - Path=/api/auth/**,/api/users/**,/api/admin/users/**,/api/admin/wallet/**
+        - id: order
+          uri: ${ORDER_ROUTE:http://localhost:8083}
+          predicates:
+            - Path=/api/orders/**,/api/notices/**,/api/admin/orders/**
+        - id: product
+          uri: ${PRODUCT_ROUTE:http://localhost:8082}
+          predicates:
+            - Path=/api/products/**,/api/categories/**,/api/cart/**,/api/admin/products/**,/api/admin/categories/**,/api/admin/stock/**
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+market:
+  auth-url: ${AUTH_URL:http://localhost:8081/api/users/identity}

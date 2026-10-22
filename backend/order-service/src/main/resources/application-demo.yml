@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:campus_order;MODE=MySQL;DB_CLOSE_DELAY=-1
+    username: sa
+    password:
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:db/schema.sql
+management:
+  health:
+    rabbit:
+      enabled: false

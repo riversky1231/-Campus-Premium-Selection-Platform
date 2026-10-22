@@ -1,0 +1,51 @@
+server:
+  port: 8083
+spring:
+  boot:
+    admin:
+      client:
+        enabled: ${MONITOR_ENABLED:false}
+        url: ${MONITOR_URL:http://monitor:8090}
+        username: ${MONITOR_USER:monitor}
+        password: ${MONITOR_PASSWORD:}
+  application:
+    name: order-service
+  profiles:
+    default: demo
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: true
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      validation-query: SELECT 1
+  cloud:
+    openfeign:
+      client:
+        config:
+          default:
+            connectTimeout: 3000
+            readTimeout: 10000
+    nacos:
+      discovery:
+        enabled: false
+    sentinel:
+      eager: true
+seata:
+  enabled: false
+  enable-auto-data-source-proxy: false
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+market:
+  internal-token: ${INTERNAL_TOKEN:}
+  demo: true
+  rabbit-enabled: false
+  product-url: ${PRODUCT_URL:http://localhost:8082}
+  user-url: ${USER_URL:http://localhost:8081}
+  order-timeout-seconds: ${ORDER_TIMEOUT_SECONDS:900}
+feign:
+  sentinel:
+    enabled: true

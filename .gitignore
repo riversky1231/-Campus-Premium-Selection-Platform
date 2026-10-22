@@ -1,0 +1,23 @@
+**/target/
+.m2/
+.env
+.env.*
+!.env.example
+*.log
+backend-run/
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
+miniprogram/project.private.config.json
+task_plan.md
+findings.md
+progress.md
+# Local diagnostics excluded from distribution
+.mvn/maven.config
+tools/CoreBusinessCheck.java
+tools/OfflineInventoryCheck.java
+tools/OfflineUserTests.java
+tools/verify-core.py
+docs/VERIFICATION.md

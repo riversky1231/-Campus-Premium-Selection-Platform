@@ -1,0 +1,29 @@
+spring:
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST:mysql}:3306/campus_user?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    username: ${MYSQL_USER:campus_user}
+    password: ${MYSQL_PASSWORD}
+  sql:
+    init:
+      mode: never
+  cloud:
+    nacos:
+      discovery:
+        enabled: true
+        server-addr: ${NACOS_ADDR:nacos:8848}
+        username: ${NACOS_USERNAME:nacos}
+        password: ${NACOS_PASSWORD}
+seata:
+  enabled: true
+  enable-auto-data-source-proxy: true
+  data-source-proxy-mode: AT
+  tx-service-group: campus_tx_group
+  registry:
+    type: file
+  service:
+    vgroup-mapping:
+      campus_tx_group: default
+    grouplist:
+      default: ${SEATA_SERVER:seata:8091}
+market:
+  demo: false

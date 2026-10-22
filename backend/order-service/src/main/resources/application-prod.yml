@@ -1,0 +1,47 @@
+spring:
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST:mysql}:3306/campus_order?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    username: ${MYSQL_USER:campus_order}
+    password: ${MYSQL_PASSWORD}
+  rabbitmq:
+    host: ${RABBITMQ_HOST:rabbitmq}
+    username: ${RABBITMQ_USER:campus}
+    password: ${RABBITMQ_PASSWORD}
+    publisher-confirm-type: correlated
+    publisher-returns: true
+    template:
+      mandatory: true
+    listener:
+      simple:
+        default-requeue-rejected: false
+        retry:
+          enabled: true
+          max-attempts: 5
+          initial-interval: 2s
+  sql:
+    init:
+      mode: never
+  cloud:
+    nacos:
+      discovery:
+        enabled: true
+        server-addr: ${NACOS_ADDR:nacos:8848}
+        username: ${NACOS_USERNAME:nacos}
+        password: ${NACOS_PASSWORD}
+seata:
+  enabled: true
+  enable-auto-data-source-proxy: true
+  data-source-proxy-mode: AT
+  tx-service-group: campus_tx_group
+  registry:
+    type: file
+  service:
+    vgroup-mapping:
+      campus_tx_group: default
+    grouplist:
+      default: ${SEATA_SERVER:seata:8091}
+market:
+  demo: false
+  rabbit-enabled: true
+  product-url: ""
+  user-url: ""

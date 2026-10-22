@@ -1,0 +1,12 @@
+seata:
+  enabled: true
+  enable-auto-data-source-proxy: true
+  data-source-proxy-mode: AT
+  tx-service-group: campus_tx_group
+  registry:
+    type: file
+  service:
+    vgroup-mapping:
+      campus_tx_group: default
+    grouplist:
+      default: ${SEATA_SERVER:127.0.0.1:8091}
